@@ -58,7 +58,7 @@ class DownloadService:
 
     def stop(self):
         """Stops the download worker."""
-        self._worker.shutdown(wait=False)
+        thread_manager.shutdown_worker("download_worker", wait=False)
 
     def add_to_queue(self, media_item: MediaItem, episode_number: str) -> bool:
         """Mark an episode as queued in the registry (no immediate download)."""

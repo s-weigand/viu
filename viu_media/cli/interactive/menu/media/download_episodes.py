@@ -84,5 +84,7 @@ def download_episodes(ctx: Context, state: State) -> State | InternalDirective:
 
     feedback.success(f"Finished downloading {len(selected_episodes)} episodes.")
 
+    download_service.stop()
+
     # After downloading, return to the media actions menu
     return InternalDirective.BACK
