@@ -40,7 +40,11 @@ def execute_graphql_query_with_get_request(
 
 
 def execute_graphql(
-    url: str, httpx_client: Client, graphql_file: Path, variables: dict, headers: dict | None = None
+    url: str,
+    httpx_client: Client,
+    graphql_file: Path,
+    variables: dict,
+    headers: dict | None = None,
 ) -> Response:
     query = load_graphql_from_file(graphql_file)
     json_body = {"query": query, "variables": variables}

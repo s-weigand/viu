@@ -66,10 +66,10 @@ def is_frozen() -> bool:
 def get_python_executable() -> str:
     """
     Get the Python executable path.
-    
+
     In frozen (PyInstaller) apps, sys.executable points to the .exe,
     so we need to find the system Python instead.
-    
+
     Returns:
         Path to a Python executable.
     """

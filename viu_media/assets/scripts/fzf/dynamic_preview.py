@@ -368,9 +368,27 @@ def main():
 
         studios_list = media.get("studios", {}).get("nodes", [])
         # Studios are those with isAnimationStudio=true
-        studios = ", ".join([s["name"] for s in studios_list if s.get("name") and s.get("isAnimationStudio")]) or "N/A"
+        studios = (
+            ", ".join(
+                [
+                    s["name"]
+                    for s in studios_list
+                    if s.get("name") and s.get("isAnimationStudio")
+                ]
+            )
+            or "N/A"
+        )
         # Producers are those with isAnimationStudio=false
-        producers = ", ".join([s["name"] for s in studios_list if s.get("name") and not s.get("isAnimationStudio")]) or "N/A"
+        producers = (
+            ", ".join(
+                [
+                    s["name"]
+                    for s in studios_list
+                    if s.get("name") and not s.get("isAnimationStudio")
+                ]
+            )
+            or "N/A"
+        )
 
         synonyms_list = media.get("synonyms", [])
         # Include romaji in synonyms if different from title
@@ -381,7 +399,9 @@ def main():
 
         # Tags
         tags_list = media.get("tags", [])
-        tags = ", ".join([t.get("name", "") for t in tags_list if t.get("name")]) or "N/A"
+        tags = (
+            ", ".join([t.get("name", "") for t in tags_list if t.get("name")]) or "N/A"
+        )
 
         # Next airing episode
         next_airing = media.get("nextAiringEpisode")
@@ -390,9 +410,12 @@ def main():
             airing_at = next_airing.get("airingAt")
             if airing_at:
                 from datetime import datetime
+
                 try:
                     dt = datetime.fromtimestamp(airing_at)
-                    next_episode_str = f"Episode {next_ep} on {dt.strftime('%A, %d %B %Y at %H:%M')}"
+                    next_episode_str = (
+                        f"Episode {next_ep} on {dt.strftime('%A, %d %B %Y at %H:%M')}"
+                    )
                 except (ValueError, OSError):
                     next_episode_str = f"Episode {next_ep}"
             else:

@@ -330,7 +330,7 @@ class Session:
 
     def load_menus_from_folder(self, package: str):
         """Load menu modules from a subfolder.
-        
+
         Uses pkgutil to discover modules for regular Python, and falls back
         to the package's __all__ list for PyInstaller frozen executables.
         """
@@ -347,13 +347,14 @@ class Session:
         # Try pkgutil first (works in regular Python)
         package_path = getattr(parent_package, "__path__", None)
         module_names = []
-        
+
         if package_path:
             module_names = [
-                name for _, name, ispkg in pkgutil.iter_modules(package_path)
+                name
+                for _, name, ispkg in pkgutil.iter_modules(package_path)
                 if not ispkg and not name.startswith("_")
             ]
-        
+
         # Fallback to __all__ for PyInstaller frozen executables
         if not module_names:
             module_names = getattr(parent_package, "__all__", [])
@@ -366,9 +367,7 @@ class Session:
                 # which runs the @session.menu decorators
                 importlib.import_module(full_module_name)
             except Exception as e:
-                logger.error(
-                    f"Failed to load menu module '{full_module_name}': {e}"
-                )
+                logger.error(f"Failed to load menu module '{full_module_name}': {e}")
 
 
 # Create a single, global instance of the Session to be imported by menu modules.

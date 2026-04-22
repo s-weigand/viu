@@ -110,4 +110,3 @@ def map_to_server(
     return Server(
         name="kwik", links=links, episode_title=episode.title, headers=headers
     )
-

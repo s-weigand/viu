@@ -97,7 +97,7 @@ class MpvPlayer(BasePlayer):
                 "is.xyz.mpv/.MPVActivity",
             ]
 
-        subprocess.run(args,env=detect.get_clean_env())
+        subprocess.run(args, env=detect.get_clean_env())
 
         return PlayerResult(params.episode)
 
@@ -186,7 +186,7 @@ class MpvPlayer(BasePlayer):
 
         logger.info(f"Starting MPV with IPC socket: {socket_path}")
 
-        process = subprocess.Popen(pre_args + mpv_args,env=detect.get_clean_env())
+        process = subprocess.Popen(pre_args + mpv_args, env=detect.get_clean_env())
 
         return process
 
@@ -211,7 +211,7 @@ class MpvPlayer(BasePlayer):
             args.append("--player-args")
             args.extend(mpv_args)
 
-        subprocess.run(args,env=detect.get_clean_env())
+        subprocess.run(args, env=detect.get_clean_env())
         return PlayerResult(params.episode)
 
     def _stream_on_desktop_with_syncplay(self, params: PlayerParams) -> PlayerResult:
@@ -233,7 +233,7 @@ class MpvPlayer(BasePlayer):
         if mpv_args := self._create_mpv_cli_options(params):
             args.append("--")
             args.extend(mpv_args)
-        subprocess.run(args,env=detect.get_clean_env())
+        subprocess.run(args, env=detect.get_clean_env())
 
         return PlayerResult(params.episode)
 
