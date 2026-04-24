@@ -16,6 +16,7 @@ from .mappers import (
     map_to_anime_result,
     map_to_search_results,
 )
+from anipy_api.provider.providers.allanime_provider import _decode_tobeparsed
 
 if TYPE_CHECKING:
     from .types import AllAnimeEpisode
@@ -72,7 +73,9 @@ class AllAnime(BaseAnimeProvider):
             },
             headers=API_GRAPHQL_HEADERS,
         )
-        episode: AllAnimeEpisode = episode_response.json()["data"]["episode"]
+        episode: AllAnimeEpisode = _decode_tobeparsed(
+            episode_response.json()["data"]["tobeparsed"]
+        )["episode"]
         for source in episode["sourceUrls"]:
             if server := extract_server(self.client, params.episode, episode, source):
                 yield server

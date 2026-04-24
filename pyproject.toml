@@ -6,6 +6,7 @@ license = "UNLICENSE"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
+    "anipy-api>=3.8.7",
     "click>=8.1.7",
     "httpx>=0.28.1",
     "inquirerpy>=0.3.4",
